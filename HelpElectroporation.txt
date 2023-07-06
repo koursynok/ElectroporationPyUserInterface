@@ -1,0 +1,21 @@
+C= 47nF
+R1 = 100k ohm
+Sample 
+R2 = 4.08M ohm   + Roscillo = 1M ohm
+Voltage divider bridge Uout = Uin*0.197
+
+
+The First part of the interface is to control the generator and relay channels . 
+
+The second part is to send generator pulse, without relay control. In other word, is to send a DC wave during a setting time. 
+
+The third part allows you to send multiple pulses with condensator. 
+You can manage the charging voltage of condensator, its charging time.
+"Time between pulses" corresponds to the desired time interval between pulses. 
+You can also decide to send pulses in automaticly after desired waiting time.
+
+The last part correspond to the electroporation program, by the sending of high voltage pulse 
+
+Take note : the minimum value to control the relay is 0.032 sec between command. But at this value, the time is not really accurate.
+For an accurate time control, is better to be supperior than 100ms.
+To Update electroporator device, replace the relay by a high-voltage MOSFET transistor (IRFP460, VISHAY). 
