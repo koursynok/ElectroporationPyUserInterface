@@ -14,8 +14,12 @@ You can manage the charging voltage of condensator, its charging time.
 "Time between pulses" corresponds to the desired time interval between pulses. 
 You can also decide to send pulses in automaticly after desired waiting time.
 
-The last part correspond to the electroporation program, by the sending of high voltage pulse 
+The last part correspond to the electroporation program, by the sending of high voltage pulse followed by multiples low voltages 
+pulses to create electrophoretic field.
+The gap between electrod in chip is generally 2 or 3mm. 
+Please choose HV field arround 750V/cm en LV field arround 50V/cm during average 100ms.  
 
-Take note : the minimum value to control the relay is 0.032 sec between command. But at this value, the time is not really accurate.
+Take note : the minimum value to control the relay is 0.032 sec between command. 
+But at this value, the time is not really accurate.
 For an accurate time control, is better to be supperior than 100ms.
 To Update electroporator device, replace the relay by a high-voltage MOSFET transistor (IRFP460, VISHAY). 
