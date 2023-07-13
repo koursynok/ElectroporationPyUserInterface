@@ -3,9 +3,10 @@ This code was written by David Gilardot, during his internship with the NBMS tea
 If you access this code via a QRcode, remember to install all the necessary packages for a recent version of Python.  
 
 Here we use IDLE (Python) 3.11.3 
-In the cmd tool, run the commands below:  
+In the cmd tool, run the commands below: 
+
 pip install pyvisa 
-pip install pyserial 
+pip install pyserial
 pip install tk 
 pip install time  
 
