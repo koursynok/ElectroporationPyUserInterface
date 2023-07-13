@@ -67,36 +67,36 @@ def setVoltage():
     print(f"Tension set to {voltage:.2f} V on generator, OUTPUT = {voltageC:.2f}")
     print("Due to RC circuit resistance, the OUTPUT voltage will be reduce. (0.8587*x)_ x= Current (V) input")
 
-#ch1Right = Transfect = 0
-def ch1Right():
+#ch1_0 = Transfect = 0
+def ch1_0():
     relay  = "33 05 00 00 00 00 C9 D8"
     ser.write(bytes.fromhex(relay))
     print("Ch1 = 0 = Transfect")
-#ch1Left = Monitoring = 1
-def ch1Left():
+#ch1_1 = Monitoring = 1
+def ch1_1():
     relay  = "33 05 00 00 ff 00 88 28"
     ser.write(bytes.fromhex(relay))
     print("Ch1 = 1 = Impedance monitoring")
-#ch2Open = Charge = 0
-def ch2Open():
+#ch2_0 = Charge = 0
+def ch2_0():
     relay  = "33 05 00 01 00 00 98 18" 
     rs485Write(relay)
     print("Ch2 = 0 = Charge")
-#ch2Left = Discharge = 1
-def ch2Left():
+#ch2_1 = Discharge = 1
+def ch2_1():
     relay  = "33 05 00 01 ff 00 D9 E8"
     rs485Write(relay)
     print("Ch2 = 1 = Discharge")
 
 def chConfigEp():
-    ch2Right()
+    ch2_0()
     time.sleep(timeSleepRelay)
-    ch1Right()
+    ch1_0()
     print("Relay channels set to Charge condensator and directed to sample (Transfect)")
 def chConfigImp():
-    ch1Left()
+    ch1_1()
     time.sleep(timeSleepRelay)
-    ch2Left()
+    ch2_1()
     print("Relay channels set to Monitoring and Discharge")
 
 
@@ -204,22 +204,22 @@ def MultiplePulsesProgram ():
     print ("Launching Program :", TryVoltage, "V, separated by", Totaltime,"s")
     generator.write('VSET {}'.format(TryVoltage))
     generator.write('HVON') #start generator
-    ch1Right () 
+    ch1_0 () 
     time.sleep(timeSleepRelay)
-    ch2Right()   # charge of capacitor
+    ch2_0()   # charge of capacitor
     time.sleep(3)##attendre 3sec que le générateur charge
     print ("Beginning of pulses")
     for Pulse_number in range(int(Pulse_count)):
-        ch1Left()   # charge 
+        ch1_1()   # charge 
         print ("Charge")
         time.sleep(ChargingTime)
-        ch1Right() # Discharge
+        ch1_0() # Discharge
         time.sleep(TimeBetweenPulse)
         print ("Discharge : Pulse", Pulse_number+1, "at", TryVoltage, "V")
     print ("End of cycle of",Pulse_count,"pulses")
-    ch1Left()
+    ch1_1()
     print("Sample ready for impedance measurement")
-    ch2Left()
+    ch2_1()
     print ("Discharge of condensator by short circuiting")
     generator.write('HVOF')
     generator.write("*RST") #reset generator
@@ -237,16 +237,16 @@ def LaunchProgram ():
     print(HVvoltage)
     print ("Charging generator")
     time.sleep(2)##attendre 2sec que le générateur charge
-     ch1Left()
+     ch1_1()
     print ("Charging capacitor to",HVvoltage,"V")
     time.sleep(2)#chargement du condensateur
     start_HVtime = time.time()
-    ch2Left()#First pulse
+    ch2_1()#First pulse
     voltageHV = float(generator.query('VOUT?'))
     print ("HV pulse start")
     ##  time.sleep(HVduration)  Time for HV pulse but limited by relay
     time.sleep(timeSleepRelay)#############################
-    ch2Right()
+    ch2_0()
     end_HVtime = time.time()
     start_HVintervaleTime = time.time()
     print ("HV pulse end")
@@ -268,11 +268,11 @@ def LaunchProgram ():
         voltagePulse = float(generator.query('VOUT?'))
         print ("Chargement du condensateur à",voltagePulse, " V(voltagePulse), Pulse n°",LV_pulse_number+1)
         #Lancement du LV pulse 
-        ch2Left() 
+        ch2_1() 
         start_LVpulseDuration = time.time()
         time.sleep(float(LVduration))# Should be superior to 0.032sec (relay)
         #time.sleep(timeSleepRelay)#############################
-        ch2Right() #Before it was ch1Right but now the voltage decrease directly (Square wave)
+        ch2_0() #Before it was ch1_0 but now the voltage decrease directly (Square wave)
         end_LVpulseDuration = time.time()
         # Attente de X ms avant de générer la prochaine impulsion
         LVpulseDuration = end_LVpulseDuration - start_LVpulseDuration
@@ -405,10 +405,10 @@ frame5.pack(side=tk.TOP, anchor=tk.W, padx=80, pady=20)
 
 # Frame pour les boutons de contrôle des relais
 frame2 = tk.Frame(root)
-btCh1 = tk.Button(frame2,text="Transfect",command=ch1Right,bg="orange").pack(side=tk.LEFT)
-btCh2 = tk.Button(frame2,text="Monitoring",command=ch1Left,bg="orange").pack(side=tk.LEFT)
-btCh3 = tk.Button(frame2,text="Charge",command=ch2Right,bg="orange").pack(side=tk.LEFT)
-btCh4 = tk.Button(frame2,text="Disharge",command=ch2Left,bg="orange").pack(side=tk.LEFT)
+btCh1 = tk.Button(frame2,text="Transfect",command=ch1_0,bg="orange").pack(side=tk.LEFT)
+btCh2 = tk.Button(frame2,text="Monitoring",command=ch1_1,bg="orange").pack(side=tk.LEFT)
+btCh3 = tk.Button(frame2,text="Charge",command=ch2_0,bg="orange").pack(side=tk.LEFT)
+btCh4 = tk.Button(frame2,text="Disharge",command=ch2_1,bg="orange").pack(side=tk.LEFT)
 
 space_label = tk.Label(frame2, width=10).pack(side=tk.LEFT)
 
