@@ -5,10 +5,10 @@ If you access this code via a QRcode, remember to install all the necessary pack
 Here we use IDLE (Python) 3.11.3 
 In the cmd tool, run the commands below: 
 
-pip install pyvisa 
-pip install pyserial
-pip install tk 
-pip install time  
+pip install pyvisa ; 
+pip install pyserial ; 
+pip install tk ;
+pip install time ;  
 
 This repository cointain two different codes, OneChanel if you use a the device which use only one channel of the relay and TwoChannels for both. You can find a picture representing two differents device configuration. 
 
