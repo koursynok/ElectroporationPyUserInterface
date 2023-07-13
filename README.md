@@ -9,6 +9,8 @@ pip install pyserial
 pip install tk 
 pip install time  
 
+This repository cointain two different codes, OneChanel if you use a the device which use only one channel of the relay and TwoChannels for both. You can find a picture representing two differents device configuration. 
+
 Note that when you run this code, the program will search for device connection :  
 - To connect generator with GPIB, you have to download Keysight IO Library Suite and use IO Connection Expert to find your device the first time. Please let run the application at the start of your laptop to facilitate connection process for the following experiments.  
 - GPIB configured on channel 16. Configure the GPIB correctly or modify line 17.
