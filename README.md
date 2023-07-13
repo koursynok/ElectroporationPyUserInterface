@@ -10,6 +10,7 @@ pip install tk
 pip install time  
 
 Note that when you run this code, the program will search for device connection :  
+- To connect generator with GPIB, you have to download Keysight IO Library Suite and use IO Connection Expert to find your device the first time. Please let run the application at the start of your laptop to facilitate connection process for the following experiments.  
 - GPIB configured on channel 16. Configure the GPIB correctly or modify line 17.
 - RS485 modbus relay connected to your computer's USB 3 port. Choose the correct port or search in the device manager. To do this, open the manager, connect your USB/RS485 converter to the computer, search for it in the USB manager, open the device properties and note the slot number associated with this USB port. You can then change the COM port number used in the code on line 12.
 
